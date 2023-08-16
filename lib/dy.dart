@@ -11,7 +11,7 @@ class Dy {
     return DyPlatform.instance.getPlatformVersion();
   }
 
-  Future<String?> loginInWithDouyin(String scope) {
+  Future<dynamic?> loginInWithDouyin(String scope) {
     return DyPlatform.instance.loginInWithDouyin(scope);
   }
 
@@ -31,25 +31,7 @@ class Dy {
     return DyPlatform.instance.reNewAccessToken(refreshToken);
   }
 
-  Future<dynamic> shareToEditPage(
-      List<String> imgPathList,
-      List<String> videoPathList,
-      List<String> mHashTagList,
-      bool shareToPublish,
-      String mState,
-      String appId,
-      String appTitle,
-      String description,
-      String appUrl) {
-    return DyPlatform.instance.shareToEditPage(
-        imgPathList,
-        videoPathList,
-        mHashTagList,
-        shareToPublish,
-        mState,
-        appId,
-        appTitle,
-        description,
-        appUrl);
+  Future<dynamic> shareToEditPage(List<String> imgPathList, List<String> videoPathList, List<String> mHashTagList, bool shareToPublish, String mState, String appId, String appTitle, String description, String appUrl) {
+    return DyPlatform.instance.shareToEditPage(imgPathList, videoPathList, mHashTagList, shareToPublish, mState, appId, appTitle, description, appUrl);
   }
 }

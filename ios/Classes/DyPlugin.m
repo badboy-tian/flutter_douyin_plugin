@@ -45,7 +45,7 @@ static DyPlugin *instance=nil;
       [self initSdk:options result:result];
   }else if([@"loginInWithDouyin" isEqualToString:call.method]){
       ///拿到微信授权
-      [self loginWithDy];
+      [self loginWithDy:options result:result];
   }else if([@"shareToPublishPage" isEqualToString:call.method]){
       ///跳转到分享页
       [self shareToEditPage:options];
@@ -72,20 +72,21 @@ static DyPlugin *instance=nil;
 }
 
 #pragma mark - Action
-- (void) loginWithDy{
+- (void) loginWithDy: (NSDictionary *)options result:(FlutterResult)result{
     DouyinOpenSDKAuthRequest *request=[[DouyinOpenSDKAuthRequest alloc] init];
     request.permissions=[NSOrderedSet orderedSetWithObject:@"user_info"];
     [request sendAuthRequestViewController:[self viewController] completeBlock:^(DouyinOpenSDKAuthResponse * _Nonnull resp) {
-       NSString *alertString = nil;
        if(resp.errCode==0){
            ///拿到code了
            NSString *code=resp.code;
-           NSDictionary *resultMap=@{@"authCode":code};
+           NSDictionary *resultMap=@{@"code":@0, @"result":code, @"errorMessage":(resp.errString) ? resp.errString : @""};
            [self->_channel invokeMethod:@"getAccessToken" arguments:resultMap];
-           alertString = [NSString stringWithFormat:@"Author Success Code : %@, permission : %@",resp.code, resp.grantedPermissions];
-           NSLog(@"result is %@",alertString);
+           result(resultMap);
        }else{
            ///失败了
+           NSDictionary *resultMap=@{@"code":@(resp.errCode), @"result":@"", @"errorMessage":(resp.errString) ? resp.errString : @""};
+           [self->_channel invokeMethod:@"getAccessToken" arguments:resultMap];
+           result(resultMap);
        }
     }];
 }

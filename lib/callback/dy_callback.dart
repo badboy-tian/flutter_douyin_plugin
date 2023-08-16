@@ -1,2 +1,1 @@
-typedef DyCallBackListener = void Function(
-    String eventName, dynamic eventParams);
+typedef DyCallBackListener = void Function(String eventName, dynamic eventParams);

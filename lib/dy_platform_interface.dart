@@ -29,7 +29,7 @@ abstract class DyPlatform extends PlatformInterface {
   }
 
   ///登录
-  Future<String?> loginInWithDouyin(String scope) {
+  Future<dynamic?> loginInWithDouyin(String scope) {
     throw UnimplementedError('loginInWithDouyin() has not been implemented.');
   }
 
@@ -50,8 +50,7 @@ abstract class DyPlatform extends PlatformInterface {
 
   ///增加回调
   void addDyCallbackListener(DyCallBackListener callBackListener) {
-    throw UnimplementedError(
-        'addDyCallbackListener() has not been implemented.');
+    throw UnimplementedError('addDyCallbackListener() has not been implemented.');
   }
 
   ///刷新AccessToken
@@ -60,16 +59,7 @@ abstract class DyPlatform extends PlatformInterface {
   }
 
   ///分享去编辑页面
-  Future<dynamic> shareToEditPage(
-      List<String> imgPathList,
-      List<String> videoPathList,
-      List<String> mHashTagList,
-      bool shareToPublish,
-      String mState,
-      String appId,
-      String appTitle,
-      String description,
-      String appUrl) {
+  Future<dynamic> shareToEditPage(List<String> imgPathList, List<String> videoPathList, List<String> mHashTagList, bool shareToPublish, String mState, String appId, String appTitle, String description, String appUrl) {
     throw UnimplementedError('shareToEditPage() has not been implemented.');
   }
 }

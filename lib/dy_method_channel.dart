@@ -25,11 +25,12 @@ class MethodChannelDy extends DyPlatform {
           if (arguments != null) {
             debugPrint("arguments is $arguments");
             try {
-              debugPrint("arguments is ${arguments["code"] == "200"}");
-              if (arguments["code"] == 200) {
-                debugPrint("arguments is ${arguments["code"] == "200"}");
-
-                _callBackListener?.call("getAuthCode", arguments);
+              var code = arguments["code"];
+              var result = arguments["result"];
+              var errorMessage = arguments["errorMessage"];
+              //debugPrint("_callBackListener == null: ${_callBackListener == null}");
+              if (_callBackListener != null) {
+                _callBackListener!("getAuthCode", arguments);
               }
             } on Exception catch (e) {
               debugPrint("error is $e");
@@ -53,17 +54,13 @@ class MethodChannelDy extends DyPlatform {
 
   @override
   Future<String?> getPlatformVersion() async {
-    final version =
-        await methodChannel.invokeMethod<String>('getPlatformVersion');
+    final version = await methodChannel.invokeMethod('getPlatformVersion');
     return version;
   }
 
   @override
-  Future<String?> loginInWithDouyin(String scope) async {
-    final result =
-        await methodChannel.invokeMethod<String>('loginInWithDouyin',{
-          "scope":scope
-        });
+  Future<dynamic?> loginInWithDouyin(String scope) async {
+    final result = await methodChannel.invokeMethod('loginInWithDouyin', {"scope": scope});
     return result;
   }
 
@@ -71,8 +68,7 @@ class MethodChannelDy extends DyPlatform {
   Future<String?> initKey(String clientKey, String clientSecret) async {
     DyConf.clientKey = clientKey;
     DyConf.clientSecret = clientSecret;
-    final result = await methodChannel
-        .invokeMethod<String>('initSdk', {"clientKey": clientKey});
+    final result = await methodChannel.invokeMethod('initSdk', {"clientKey": clientKey});
     return result;
   }
 
@@ -92,18 +88,8 @@ class MethodChannelDy extends DyPlatform {
   }
 
   @override
-  Future<dynamic> shareToEditPage(
-      List<String> imgPathList,
-      List<String> videoPathList,
-      List<String> mHashTagList,
-      bool shareToPublish,
-      String mState,
-      String appId,
-      String appTitle,
-      String description,
-      String appUrl) async {
-    final result = await methodChannel.invokeMethod<String>(
-        shareToPublish ? 'shareToPublishPage' : 'shareToEditPage', {
+  Future<dynamic> shareToEditPage(List<String> imgPathList, List<String> videoPathList, List<String> mHashTagList, bool shareToPublish, String mState, String appId, String appTitle, String description, String appUrl) async {
+    final result = await methodChannel.invokeMethod<String>(shareToPublish ? 'shareToPublishPage' : 'shareToEditPage', {
       "imgPathList": imgPathList,
       "videoPathList": videoPathList,
       "mHashTagList": mHashTagList,
