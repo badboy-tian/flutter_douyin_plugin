@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 import 'callback/dy_callback.dart';
@@ -60,6 +61,11 @@ abstract class DyPlatform extends PlatformInterface {
 
   ///分享去编辑页面
   Future<dynamic> shareToEditPage(List<String> imgPathList, List<String> videoPathList, List<String> mHashTagList, bool shareToPublish, String mState, String appId, String appTitle, String description, String appUrl) {
+    throw UnimplementedError('shareToEditPage() has not been implemented.');
+  }
+
+  //发布视频
+  Future<dynamic> shareVideo(String filePath, List<String> tags, String title, bool shareToPublish) {
     throw UnimplementedError('shareToEditPage() has not been implemented.');
   }
 }

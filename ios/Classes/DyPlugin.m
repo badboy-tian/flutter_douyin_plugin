@@ -50,9 +50,10 @@ static DyPlugin *instance=nil;
       ///跳转到分享页
       [self shareToEditPage:options];
       
+  }else if ([@"shareVideo" isEqualToString:call.method]) {
+      [self shareVideo:options result:result];
   }
-  
-  
+
   else {
     result(FlutterMethodNotImplemented);
   }
@@ -89,6 +90,20 @@ static DyPlugin *instance=nil;
            result(resultMap);
        }
     }];
+}
+
+#pragma mark - Action
+- (void) shareVideo: (NSDictionary *)options result:(FlutterResult)result{
+    NSString *filePath=options[@"filePath"];
+    NSArray *tags=options[@"tags"];
+    NSString *title=options[@"title"];
+    bool shareToPublish = options[@"shareToPublish"];
+    
+    DouyinOpenSDKShareRequest *req = [[DouyinOpenSDKShareRequest alloc] init];
+    req.mediaType = DouyinOpenSDKShareMediaTypeVideo;
+    req.landedPageType = DouyinOpenSDKLandedPagePublish;
+   
+    
 }
 
 #pragma mark - Action

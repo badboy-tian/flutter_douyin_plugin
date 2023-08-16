@@ -102,4 +102,16 @@ class MethodChannelDy extends DyPlatform {
     debugPrint("shareToEditPage result is $result");
     return result;
   }
+
+  @override
+  Future shareVideo(String filePath, List<String> tags, String title, bool shareToPublish) async {
+    final result = await methodChannel.invokeMethod<String>("shareVideo", {
+      "filePath": filePath,
+      "tags": tags,
+      "title": title,
+      "shareToPublish": shareToPublish,
+    });
+    debugPrint("shareVideo result is $result");
+    return result;
+  }
 }

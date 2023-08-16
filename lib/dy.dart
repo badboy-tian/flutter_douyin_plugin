@@ -34,4 +34,8 @@ class Dy {
   Future<dynamic> shareToEditPage(List<String> imgPathList, List<String> videoPathList, List<String> mHashTagList, bool shareToPublish, String mState, String appId, String appTitle, String description, String appUrl) {
     return DyPlatform.instance.shareToEditPage(imgPathList, videoPathList, mHashTagList, shareToPublish, mState, appId, appTitle, description, appUrl);
   }
+  
+  Future<dynamic> shareVideo(String filePath, List<String> tags, String title, bool shareToPublish){
+    return DyPlatform.instance.shareVideo(filePath, tags, title, shareToPublish);
+  }
 }
